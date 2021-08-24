@@ -101,3 +101,138 @@ namespace Matrix_
         }
 
 
+        static int MaxElementMatrix(int row, int column, int[,] matrix)
+        {
+            int maxElement = int.MinValue;
+
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < column; j++)
+                {
+                    if (matrix[i, j] > maxElement)
+                        maxElement = matrix[i, j];
+                }
+            }
+            return maxElement;
+        }
+
+        static int MinElementMatrix(int row, int column, int[,] matrix)
+        {
+            int minElement = int.MaxValue;
+
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < column; j++)
+                {
+                    if (matrix[i, j] < minElement)
+                        minElement = matrix[i, j];
+                }
+            }
+            return minElement;
+        }
+
+        static int[,] AdditionMatrix(int[,] Matrix1, int[,] Matrix2, int row, int column)
+        {
+            int[,] AddMatrix = new int[row, column];
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < column; j++)
+                {
+                    AddMatrix[i, j] = Matrix1[i, j] + Matrix2[i, j];
+                }
+            }
+            return AddMatrix;
+        }
+
+        static int[,] Multiplication(int row1, int column1, int row2, int column2, int[,] matrix1, int[,] matrix2)
+        {
+            int[,] NewMatrix = new int[row1, column2];
+            int t = 0;
+            int Sum = 0;
+            int index = 0;
+
+            for (int i = 0; i < row1; i++)
+            {
+                t = 0;
+                index = 0;
+                while (t < column2)
+                {
+                    Sum = 0;
+                    for (int j = 0; j < column1;)
+                    {
+                        for (int c = 0; c < row2; c++)
+                        {
+                            Sum += matrix1[i, j] * matrix2[c, t];
+                            j++;
+                        }
+                        t++;
+                    }
+                    NewMatrix[i, index] = Sum;
+                    index++;
+                }
+            }
+            return NewMatrix;
+        }
+
+        static int[,] ScalarMatrix(int[,] matrix, int row, int column, int scalar)
+        {
+            int[,] NewMatrix = new int[row, column];
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < column; j++)
+                {
+                    NewMatrix[i, j] = scalar * matrix[i, j];
+                }
+            }
+            return NewMatrix;
+        }
+
+        static int[,] TransposeMatrix(int[,] matrix, int row, int column)
+        {
+            int[,] TransposeMatrix = new int[column, row];
+            int newColumn = 0;
+            for (int i = 0; i < row; i++)
+            {
+                int newRow = 0;
+                for (int j = 0; j < column; j++)
+                {
+                    TransposeMatrix[newRow, newColumn] = matrix[i, j];
+                    newRow++;
+                }
+                newColumn++;
+            }
+            return TransposeMatrix;
+        }
+
+        struct Matrix
+        {
+            public int row1;
+            public int column1;
+            public int row2;
+            public int column2;
+
+
+            public Matrix(int row1, int column1, int row2, int column2)
+            {
+                this.row1 = row1;
+                this.column1 = column1;
+                this.row2 = row2;
+                this.column2 = column2;
+            }
+
+            public void PrintMatrix(int row, int column, int[,] matrix)
+            {
+                for (int i = 0; i < row; i++)
+                {
+                    for (int j = 0; j < column; j++)
+                    {
+                        Console.Write($"{matrix[i, j]}\t");
+                    }
+                    Console.WriteLine();
+                }
+            }
+
+        }
+    }
+
+}
